@@ -25,14 +25,14 @@ server
   // Maps req.body to req.params so there is no switching between them
   .use(restify.bodyParser())
 
-var getRequestCout=0
-var postRequestCount=0
+var totalGetRequestCout=0
+var TotalPostRequestCount=0
 
 
 // Get all images in the system
 server.get('/images', function (req, res, next) {
-  getRequestCout=getRequestCout+1
-  console.log('Processed Request Count--> Get:%s, Post:%s',getRequestCout,postRequestCount)
+  totalGetRequestCout=totalGetRequestCout+1
+  console.log('Processed Request Count--> Get:%s, Post:%s',totalGetRequestCout,TotalPostRequestCount)
   console.log('images GET: received request')
   // Find every entity within the given collection
   imageSave.find({}, function (error, images) {
@@ -46,8 +46,8 @@ server.get('/images', function (req, res, next) {
 
 // Get a single image by their image id
 server.get('/images/:id', function (req, res, next) {
-  getRequestCout=getRequestCout+1
-  console.log('Processed Request Count--> Get:%s, Post:%s',getRequestCout,postRequestCount)
+  totalGetRequestCout=totalGetRequestCout+1
+  console.log('Processed Request Count--> Get:%s, Post:%s',totalGetRequestCout,TotalPostRequestCount)
   console.log(' images GET: received request')
   // Find a single image by their id within save
   imageSave.findOne({_id: req.params.id}, function(error,image)
@@ -69,8 +69,8 @@ server.get('/images/:id', function (req, res, next) {
 
 // Create a new image
 server.post('/images', function (req, res, next) {
-  postRequestCount=postRequestCount+1
-  console.log('Processed Request Count--> Get:%s, Post:%s',getRequestCout,postRequestCount)
+  TotalPostRequestCount=TotalPostRequestCount+1
+  console.log('Processed Request Count--> Get:%s, Post:%s',totalGetRequestCout,TotalPostRequestCount)
   console.log(' images POST: received request') 
 var newImage= {
   imageId : req.params.imageId,
@@ -110,8 +110,8 @@ if (newImage.url == undefined)
 
 // Update an image by their id
 server.put('/images/:id', function (req, res, next) {
-  postRequestCount=postRequestCount+1
-  console.log('Processed Request Count--> Get:%s, Post:%s',getRequestCout,postRequestCount)
+  TotalPostRequestCount=TotalPostRequestCount+1
+  console.log('Processed Request Count--> Get:%s, Post:%s',totalGetRequestCout,TotalPostRequestCount)
   console.log('images PUT: received request') 
   // Make sure name is defined
   if (req.params.name === undefined ) {
@@ -153,8 +153,8 @@ server.put('/images/:id', function (req, res, next) {
 
 // Delete image with the given id
 server.del('/images', function (req, res, next) {
-  postRequestCount=postRequestCount+1
-  console.log('Processed Request Count--> Get:%s, Post:%s',getRequestCout,postRequestCount)
+  TotalPostRequestCount=TotalPostRequestCount+1
+  console.log('Processed Request Count--> Get:%s, Post:%s',totalGetRequestCout,TotalPostRequestCount)
   console.log(' images DELETE: received request') 
   // Delete the image with the persistence engine
   imageSave.deleteMany( {},function (error, image) {
