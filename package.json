@@ -1,0 +1,13 @@
+{
+    "name": "ImageApi",
+    "version": "1.0.0",
+    "description": "REST API - Images",
+    "dependencies": {
+        "dtrace-provider": "^0.8.8",
+        "restify": "^4.3.4",
+        "save": "^2.4.0"
+    },
+    "author": "zvbox",
+    "private": true,
+    "main": "index.js"
+}
